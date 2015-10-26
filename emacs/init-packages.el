@@ -1,35 +1,30 @@
 (require 'package)
 
-(add-to-list 'package-archives
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+(setq url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+     ("http" . "proxy.bloomberg.com:81")
+     ("https" . "proxy.bloomberg.com:81")))
 
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+	     '("melpa" . "http://melpa.org/packages/") t)
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-
-
-; list the packages you want
-(setq package-list
-    '(python-environment deferred epc 
-        flycheck ctable jedi concurrent company cyberpunk-theme elpy 
-        yasnippet pyvenv highlight-indentation find-file-in-project 
-        sql-indent sql exec-path-from-shell iedit
-        auto-complete popup let-alist magit git-rebase-mode 
-        git-commit-mode minimap popup))
-
-
-; activate all the packages
 (package-initialize)
 
-; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
+(if (not (package-installed-p 'use-package))
+    (progn
+      (package-refresh-contents)
+      (package-install 'use-package)))
 
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(require 'use-package)
+
+(use-package magit
+  :ensure magit)
+
+
+
+;deferred epc 
+;        flycheck ctable jedi concurrent company cyberpunk-theme elpy 
+;        yasnippet pyvenv highlight-indentation find-file-in-project 
+;        sql-indent sql exec-path-from-shell iedit
+;        auto-complete popup let-alist magit git-rebase-mode 
+;        git-commit-mode minimap popup
