@@ -5,6 +5,7 @@
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ("elpy" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; Goal is for this to be a cross-platform .emacs file
@@ -101,24 +102,6 @@
 
 ;; http://www.emacswiki.org/emacs/WhiteSpace
 (require 'whitespace)
-
-;; Display line and column numbers
-(setq line-number-mode t)
-(setq column-number-mode t)
-
-;; Remove unnecessary gui stuff
-(scroll-bar-mode 0)
-(tool-bar-mode 0)
-(menu-bar-mode 1)
-
-;; Colors
-(set-background-color "black")
-(set-face-background 'default "black")
-(set-face-background 'region "black")
-(set-face-foreground 'default "white")
-(set-face-foreground 'region "gray60")
-(set-foreground-color "white")
-(set-cursor-color "red")
 
 
 ;; System-type and particular system customization
@@ -247,9 +230,6 @@
 ;; BUFFER SWITCHING STUFF  (IDO mode seems better since activates for find-file as well)
 ;;(iswitchb-mode 1)
 
-;; IDO Mode
-(require 'ido)
-(ido-mode t)
 
 ;; ESS Stuff
 					; http://www.emacswiki.org/cgi-bin/wiki/EmacsSpeaksStatistics
@@ -363,24 +343,6 @@
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;; WindMove
-(require 'windmove)			; to load the package
-(global-set-key (kbd "C-M-<left>")  'windmove-left)
-(global-set-key (kbd "C-M-<up>")    'windmove-up)
-(global-set-key (kbd "C-M-<right>") 'windmove-right)
-(global-set-key (kbd "C-M-<down>")  'windmove-down)
-(global-set-key (kbd "C-M-b")  'windmove-left)
-(global-set-key (kbd "C-M-p")    'windmove-up)
-(global-set-key (kbd "C-M-f") 'windmove-right)
-(global-set-key (kbd "C-M-n")  'windmove-down)
-(setq windmove-wrap-around t)
-
-;; always end a file with a newline
-;;(setq require-final-newline 'query)
-
-;; default to better frame titles
-(setq frame-title-format
-      (concat  "%b - emacs@" (system-name)))
 
 ;; eshell stuff
 (defun eshell-maybe-bol ()
@@ -426,10 +388,6 @@ by using nxml's indentation rules."
     (indent-region begin end nil)
     (normal-mode))
   (message "All indented!"))
-
-;; TSV mode
-(autoload 'tsv-mode "tsv-mode" "A mode to edit table like file" t)
-(autoload 'tsv-normal-mode "tsv-mode" "A minor mode to edit table like file" t)
 
 (setq mail-user-agent 'message-user-agent)
 (setq mail-default-headers
