@@ -21,11 +21,21 @@
 (require 'use-package)
 
 (use-package magit
+  :disabled t
   :ensure magit)
 
 (use-package elpy
   :init (elpy-enable)
   :ensure)
+
+(use-package ess
+  :commands R
+  :ensure)
+
+
+;; ESS Mode
+(require 'ido)
+(ido-mode t)
 
 
 ;deferred epc 
