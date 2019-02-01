@@ -5,7 +5,10 @@
 ;     ("https" . "proxy.bloomberg.com:81")))
 
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+;(add-to-list 'package-archives
+;	     '("melpa" . "http://melpa.org/packages/") t)
 
 (add-to-list 'package-archives
 	     '("elpy" . "https://jorgenschaefer.github.io/packages/"))
@@ -27,17 +30,22 @@
   :init (elpy-enable)
   :ensure)
 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+;(package-install 'ess)
 (use-package ess
   :commands R
+  :mode "\\.R\\'"
   :ensure)
 
-
-;; ESS Mode
-(require 'ido)
-(ido-mode t)
-
-
+(require 'ess-site)
 
 ;; IDO Mode
-;;(require 'ido)
-;;(ido-mode t)
+(require 'ido)
+(ido-mode t)

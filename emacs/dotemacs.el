@@ -1,8 +1,6 @@
 ;; ~/.emacs should be a symbolic link to this file
 ;; ~/emacs should be a symbolic link to the containing directory
 
-(load-file "~/emacs/init-packages.el")
-(load-file "~/emacs/system-specific.el")
 
 ;; WindMove
 (require 'windmove)			; to load the package
@@ -104,3 +102,10 @@
     (fill-region beg end)))
 ;; Handy key definition
 (define-key global-map "\C-\M-q" 'unfill-region)
+
+;; Add programs to exec-path and PATH
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+(load-file "~/emacs/init-packages.el")
+(load-file "~/emacs/system-specific.el")
